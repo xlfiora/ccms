@@ -12,9 +12,9 @@
         <property name="filterChainDefinitions" >
             <!--url=过滤器 anon auths user logout roles perms-->
             <value>
-                /login.jsp=anon
-                /register.jsp=anon
-                /main.jsp=user
+                <!--/login.jsp=anon-->
+                <!--/register.jsp=anon-->
+                <!--/main.jsp=user-->
             </value>
         </property>
     </bean>
