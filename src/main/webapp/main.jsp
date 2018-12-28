@@ -5,7 +5,7 @@
   Time: 下午 20:52
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>校园社团管理系统主页</title>
@@ -59,34 +59,38 @@
 
             <%--用户功能--%>
             <div title="我的信息" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('个人信息','student/myMsg.jsp','icon-help')"></a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('修改个人信息','student/modifyMsg.jsp','icon-help')"></a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('个人信息','student/personInfo.jsp','icon-help')">个人信息</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('修改个人信息','student/modifyPersonInfo.jsp','icon-help')">修改个人信息</a></p>
             </div>
 
             <div title="我的社团" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团报名','student/myMsg.jsp','icon-help')"></a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('已参加社团','student/myMsg.jsp','icon-help')"></a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动','student/myMsg.jsp','icon-help')"></a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团报名','student/chooseClub.jsp','icon-help')">社团报名</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('已参加社团','student/myClub.jsp','icon-help')">已参加社团</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动','student/myActivity.jsp','icon-help')">社团活动</a></p>
             </div>
 
             <%--管理员功能--%>
             <div title="用户管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('学生信息管理','/student.jsp','icon-help')">学生信息管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('管理员管理','/manager.jsp','icon-help')">管理员管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('角色管理','/role.jsp','icon-help')">角色管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('学生信息管理','manager/studentList.jsp','icon-help')">学生信息管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('管理员管理','manager/managerList.jsp','icon-help')">管理员管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('角色管理','role/role.jsp','icon-help')">角色管理</a></p>
             </div>
+
             <div title="社团管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">社团信息管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">社团报名管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">社团活动管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团信息管理','manager/clubList.jsp','icon-help')">社团信息管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团报名管理','manager/enrollList.jsp','icon-help')">社团报名管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动管理','manager/activityList.jsp','icon-help')">社团活动管理</a></p>
             </div>
+
             <div title="统计管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">用户统计</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">社团统计</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">社团活动统计</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('用户统计','count/stuCount.jsp','icon-help')">用户统计</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团统计','count/clubCount.jsp','icon-help')">社团统计</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动统计','count/activityCount.jsp','icon-help')">社团活动统计</a></p>
             </div>
+
             <div title="系统日志管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">系统日志</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('系统操作日志','log/actionLog.jsp','icon-help')">系统操作日志</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('系统登录日志','log/loginLog.jsp','icon-help')">系统登录日志</a></p>
             </div>
 
         </div>
@@ -103,5 +107,9 @@
     <div data-options="region:'south',split:true" style="height: 40px;background-color: #8d8d8d">
         <div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体" >&copy;校园社团管理系统 www.ccms.com</div>
     </div>
+
+
+
+
 </body>
 </html>
