@@ -34,7 +34,7 @@
                 $("#center").tabs("add",{
                     iconCls:menuIcon,
                     title:menuName,
-                    href:"${pageContext.request.contextPath}/"+menuUrl, // 一个菜单项 对应一个需要加载的数据页面
+                    href:"${pageContext.request.contextPath}/jsp/"+menuUrl, // 一个菜单项 对应一个需要加载的数据页面
                     closable:true,
                 });
             }
