@@ -42,15 +42,15 @@
     <div style="height:30px;text-align: center;font-size:large;background-color: #FFFFFF">
         学生用户列表
     </div>
-    <div class="row" style="height:496px;background-color: #FFFFFF;margin-top: 8px">
+    <div class="row" style="height:490px;background-color: #FFFFFF;margin-top: 8px">
         <div class="col-md-12">
-            <div style="margin: 10px">
+            <div style="margin: 10px;">
 
                 <%--列表--%>
-                <table id="stuList"></table>
+                <table id="stuList" style="margin-top: 10px"></table>
 
                 <%--操作栏--%>
-                <div id="stu_tb" style="display: none">
+                <div id="stu_tb" style="display: none;">
                     <a id="stu_modify" class="easyui-linkbutton"
                        data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a>
                     <a id="stu_add" class="easyui-linkbutton"

@@ -24,6 +24,30 @@
         p a{
             width: 100%;
         }
+
+
+
+        img {
+            width:300px;
+            height:240px;
+            float:left;
+        }
+        #outer {
+            margin:30px auto;
+            width:900px;
+            height:240px;
+            border:2px solid #b3b3b3;
+            overflow:hidden;
+            /*把多余的部分隐藏掉*/
+        }
+        #inner {
+            width:3000px;
+            height:240px;
+        }
+        #inner div {
+            float:left;
+        }
+
     </style>
     <script type="text/javascript">
         function addTab(menuName,menuUrl,menuIcon) {
@@ -39,6 +63,71 @@
                 });
             }
 
+        }
+
+
+        //定义变量初值
+        var dOuter = null;
+        var demo1 = null;
+        var demo2 = null;
+        var timer = null;
+        //绑定事件
+        window.onload = function() {
+            dOuter = document.getElementById('outer');
+            demo1 = document.getElementById('demo1');
+            demo2 = document.getElementById('demo2');
+            demo2.innerHTML = demo1.innerHTML;
+            //			timer=setInterval(moveLeft,10);
+            clock();
+            //绑定鼠标
+            dOuter.onmouseover = function() {
+                clearInterval(timer);
+            }
+            dOuter.onmouseout = function() {
+                //				timer=setInterval(moveLeft,10);
+                clock()
+            }
+        }
+
+        //重新定义一个函数
+        function clock() {
+            clearInterval(timer);
+            timer = setInterval(moveLeft, 10);
+        }
+
+        function clock2() {
+            clearInterval(timer);
+            timer = setInterval(moveRight, 10);
+        }
+
+        //计时器函数
+        function moveLeft() {
+            //容器向左滚动的距离
+            dOuter.scrollLeft += 2;
+            //判断临界值
+            if (dOuter.scrollLeft >= demo1.offsetWidth) {
+                dOuter.scrollLeft = 0;
+            }
+
+            //每一幅图停顿一次
+            if (dOuter.scrollLeft % 300 == 0) {
+                clearInterval(timer);
+                timer = setTimeout(clock, 1500);
+            }
+        }
+        //向右
+        function moveRight() {
+            //容器向右滚动的距离
+            dOuter.scrollLeft -= 2;
+            //判断临界值
+            if (dOuter.scrollLeft <= 0) {
+                dOuter.scrollLeft = demo1.offsetWidth;
+            }
+            //每一幅图停顿一次
+            if (dOuter.scrollLeft % 300 == 0) {
+                clearInterval(timer);
+                timer = setTimeout(clock2, 1500);
+            }
         }
     </script>
 
@@ -100,7 +189,27 @@
     <div data-options="region:'center'">
         <div id="center" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
             <div title="主页" data-options="iconCls:'icon-neighbourhood',">
+                <div class="container">
+                    <div id="outer">
 
+                        <div id="inner">
+                            <div id="demo1">
+                                <img src="http://www.jq22.com/img/cs/500x500-1.png">
+                                <img src="http://www.jq22.com/img/cs/500x500-2.png">
+                                <img src="http://www.jq22.com/img/cs/500x500-3.png">
+                                <img src="http://www.jq22.com/img/cs/500x500-4.png">
+                                <img src="http://www.jq22.com/img/cs/500x500-5.png">
+                            </div>
+                            <div id="demo2">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="text-align: center">
+                        <input type="button" onclick="clock()" value="向前翻">
+                        <input type="button" onclick="clock2()" value="向后翻">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -109,9 +218,6 @@
     <div data-options="region:'south',split:false" style="height: 25px;background-color: #8d8d8d">
         <div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体" >&copy;校园社团管理系统 www.ccms.com</div>
     </div>
-
-
-
 
 </body>
 </html>
