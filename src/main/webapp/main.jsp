@@ -45,7 +45,7 @@
 <body class="easyui-layout">
 
     <%--首部--%>
-    <div data-options="region:'north',split:true" style="height:60px;background-color: #8d8d8d">
+    <div data-options="region:'north',split:false" style="height:50px;background-color: #8d8d8d">
         <div style="font-size: 24px;color: #FAF7F7;font-family: 楷体;font-weight: 900;width: 500px;float:left;padding-left: 20px;padding-top: 10px" >校园社团管理系统</div>
         <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">${a}欢迎您：${sessionScope.managerName} &nbsp;
             <a href="${pageContext.request.contextPath}/manager/modifyManager" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
@@ -54,8 +54,8 @@
     </div>
 
     <%--左侧菜单栏--%>
-    <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
-        <div id="west" class="easyui-accordion" data-options="fit:true">
+    <div data-options="region:'west',title:'导航菜单',split:false" style="width:220px;">
+        <div id="west" class="easyui-accordion" data-options="fit:false">
 
             <%--用户功能--%>
             <div title="我的信息" data-options="iconCls:'icon-help'" style="padding:10px;">
@@ -106,7 +106,7 @@
     </div>
 
     <%--底部--%>
-    <div data-options="region:'south',split:true" style="height: 40px;background-color: #8d8d8d">
+    <div data-options="region:'south',split:false" style="height: 25px;background-color: #8d8d8d">
         <div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体" >&copy;校园社团管理系统 www.ccms.com</div>
     </div>
 

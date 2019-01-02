@@ -16,14 +16,14 @@
 <body>
 <div class="container">
         <div class="row clearfix">
-            <div class="col-md-12 column">
-                <h3 class="text-center">
+            <div class="col-md-12 column" style="margin-top: 30px">
+                <h1 class="text-center" style="font-family: Microsoft YaHei;font-weight: 900;">
                     校园社团管理系统
-                </h3>
+                </h1>
             </div>
         </div>
-        <div class="row clearfix">
-            <div class="col-md-2 column">
+        <div class="row clearfix" style="margin-top: 80px">
+            <div class="col-md-1 column">
             </div>
             <div class="col-md-4 column">
                 <p>
@@ -35,32 +35,40 @@
                 <p>
                     <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong> 编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small> 社区中。
                 </p>
+            </div>
+            <div class="col-md-2 column">
             </div>
             <div class="col-md-4 column">
                 <form role="form">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label><input type="email" class="form-control" id="exampleInputEmail1" />
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" style="width: 240px"/>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label><input type="password" class="form-control" id="exampleInputPassword1" />
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" style="width: 240px;"/>
                     </div>
                     <div class="form-group">
-                        <p class="help-block">
-                            Example block-level help text here.
-                        </p>
+                        <label for="vcode">Verification Code</label>
+                        <div>
+                        <input type="text" class="form-control" id="vcode" style="width: 100px;"/>
+                        <img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/manager/createVaildateCode" title="点击更换验证码"/>
+                        </div>
                     </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" />Check me out</label>
-                    </div> <button type="submit" class="btn btn-default">Submit</button>
                 </form>
+                <div class="checkbox">
+                    <label><input type="checkbox" />Remember Account</label>
+                </div>
+                <button type="submit" class="btn btn-success" style="width: 100px">Login</button>
+
             </div>
-            <div class="col-md-2 column">
+            <div class="col-md-1 column">
             </div>
         </div>
-        <div class="row clearfix">
+        <div class="row clearfix" style="margin-top: 80px">
             <div class="col-md-12 column">
-                <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong> 编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small> 社区中。
+                <p style="text-align: center">
+                    <em>&copy;校园社团管理系统 www.ccms.com</em>
                 </p>
             </div>
         </div>
