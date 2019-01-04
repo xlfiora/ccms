@@ -32,22 +32,30 @@
                     '<td style="border:0"><img src="upload/stu/' + rowData.stuPhoto + '" style="height:150px;"></td>' +
                     '</tr></table>';
             }
-        })
+        });
 
 
-    })
+        function stu_qq(value, name) {
+            $("#stu_dg").datagrid('load',{
+                value:value,
+                name:name
+            });
+        }
+
+
+    });
 </script>
 
 <div class="container" style="background-color:#CCCCCC;padding: 10px">
-    <div style="height:30px;text-align: center;font-size:large;background-color: #FFFFFF">
+    <div style="height:30px;text-align: center;font-family: Microsoft Yahei; font-size: 22px; font-weight: 600;background-color: #FFFFFF">
         学生用户列表
     </div>
     <div class="row" style="height:490px;background-color: #FFFFFF;margin-top: 8px">
         <div class="col-md-12">
-            <div style="margin: 10px;">
+            <div style="margin: 10px; padding-top: 10px ">
 
                 <%--列表--%>
-                <table id="stuList" style="margin-top: 10px"></table>
+                <table id="stuList"></table>
 
                 <%--操作栏--%>
                 <div id="stu_tb" style="display: none;">

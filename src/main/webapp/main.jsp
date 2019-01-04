@@ -27,16 +27,15 @@
 
 
 
-        img {
+        #inner img {
             width:300px;
             height:240px;
             float:left;
         }
         #outer {
-            margin:30px auto;
             width:900px;
             height:240px;
-            border:2px solid #b3b3b3;
+            border:2px solid #52d689;
             overflow:hidden;
             /*把多余的部分隐藏掉*/
         }
@@ -103,7 +102,7 @@
         //计时器函数
         function moveLeft() {
             //容器向左滚动的距离
-            dOuter.scrollLeft += 2;
+            dOuter.scrollLeft += 1;
             //判断临界值
             if (dOuter.scrollLeft >= demo1.offsetWidth) {
                 dOuter.scrollLeft = 0;
@@ -118,7 +117,7 @@
         //向右
         function moveRight() {
             //容器向右滚动的距离
-            dOuter.scrollLeft -= 2;
+            dOuter.scrollLeft -= 1;
             //判断临界值
             if (dOuter.scrollLeft <= 0) {
                 dOuter.scrollLeft = demo1.offsetWidth;
@@ -190,24 +189,26 @@
         <div id="center" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
             <div title="主页" data-options="iconCls:'icon-neighbourhood',">
                 <div class="container">
-                    <div id="outer">
-
-                        <div id="inner">
-                            <div id="demo1">
-                                <img src="http://www.jq22.com/img/cs/500x500-1.png">
-                                <img src="http://www.jq22.com/img/cs/500x500-2.png">
-                                <img src="http://www.jq22.com/img/cs/500x500-3.png">
-                                <img src="http://www.jq22.com/img/cs/500x500-4.png">
-                                <img src="http://www.jq22.com/img/cs/500x500-5.png">
-                            </div>
-                            <div id="demo2">
+                    <div>
+                        <div style="text-align: center;float: left">
+                            <input type="button" onmouseover="clock()" value="向前翻">
+                        </div>
+                        <div id="outer">
+                            <div id="inner">
+                                <div id="demo1">
+                                    <img src="image/shouye/1.jpg">
+                                    <img src="image/shouye/2.jpg">
+                                    <img src="image/shouye/3.jpg">
+                                    <img src="image/shouye/4.jpg">
+                                    <img src="image/shouye/5.jpg">
+                                </div>
+                                <div id="demo2">
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div style="text-align: center">
-                        <input type="button" onclick="clock()" value="向前翻">
-                        <input type="button" onclick="clock2()" value="向后翻">
+                        <div style="text-align: center;float: left">
+                            <input type="button" onmouseover="clock2()" value="向后翻">
+                        </div>
                     </div>
                 </div>
             </div>
