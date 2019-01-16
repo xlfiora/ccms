@@ -5,6 +5,25 @@ package com.xl.ccms.entity;
  */
 public class Category {
 
-    private String id;
-    private String categoryName;
+    private String cid;
+    private String cName;
+
+    public Category() {
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
+    public String getcName() {
+        return cName;
+    }
+
+    public void setcName(String cName) {
+        this.cName = cName;
+    }
 }

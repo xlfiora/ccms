@@ -1,5 +1,6 @@
 package com.xl.ccms.controller;
 
+import com.xl.ccms.entity.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,7 +17,8 @@ public class AccountController {
     }
 
     @RequestMapping("/addStu")
-    public void addStu(){
+    public void addStu(Account account){
+
 
     }
 
