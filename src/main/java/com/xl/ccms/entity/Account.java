@@ -1,5 +1,7 @@
 package com.xl.ccms.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 /**
@@ -7,8 +9,10 @@ import java.util.Date;
  */
 public class Account {
     private String id;
+    private String stuId;
     private String username;
     private String password;
+    @JSONField(format = "yyyy-MM-dd")
     private Date birthday;
     private String sex;
     private String tel;
@@ -17,7 +21,10 @@ public class Account {
     private String hobby;
     private String hometown;
     private String photo;
+    private String status;
+    @JSONField(format = "yyyy-MM-dd")
     private Date enterdate;
+    private String type;
 
     public Account() {
 
@@ -29,6 +36,14 @@ public class Account {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getStuId() {
+        return stuId;
+    }
+
+    public void setStuId(String stuId) {
+        this.stuId = stuId;
     }
 
     public String getUsername() {
@@ -111,11 +126,27 @@ public class Account {
         this.photo = photo;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Date getEnterdate() {
         return enterdate;
     }
 
     public void setEnterdate(Date enterdate) {
         this.enterdate = enterdate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

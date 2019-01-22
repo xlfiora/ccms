@@ -33,6 +33,8 @@
             float:left;
         }
         #outer {
+            margin-top: 50px;
+            margin:auto;
             width:900px;
             height:240px;
             border:2px solid #52d689;
@@ -189,10 +191,7 @@
         <div id="center" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
             <div title="主页" data-options="iconCls:'icon-neighbourhood',">
                 <div class="container">
-                    <div>
-                        <div style="text-align: center;float: left">
-                            <input type="button" onmouseover="clock()" value="向前翻">
-                        </div>
+                    <div style="padding-top: 50px">
                         <div id="outer">
                             <div id="inner">
                                 <div id="demo1">
@@ -206,9 +205,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="text-align: center;float: left">
-                            <input type="button" onmouseover="clock2()" value="向后翻">
-                        </div>
+                        <%--<div style="text-align: center;height: auto">--%>
+                            <%--<div style="text-align: center;float: left">--%>
+                                <%--<input type="button" onmouseover="clock()" value="向前翻">--%>
+                            <%--</div>--%>
+                            <%--&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                            <%--<div style="text-align: center;float: left">--%>
+                                <%--<input type="button" onmouseover="clock2()" value="向后翻">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                     </div>
                 </div>
             </div>

@@ -10,12 +10,17 @@
 <script type="text/javascript">
     $(function () {
         $("#stuList").datagrid({
-            url:"${pageContext.request.contextPath}/stu/queryAllstu",
+            url:"${pageContext.request.contextPath}/student/queryAllStu",
             columns:[[
-                {field:"stuId",title:"上师编号",width:100},
-                {field:"stuName",title:"上师名",width:100},
-                {field:"stuPhoto",title:"上师照片",width:100},
-                {field:"stuIntroduction",title:"上师简介",width:100},
+                {field:"stuId",title:"学号",width:20},
+                {field:"username",title:"姓名",width:20},
+                {field:"sex",title:"性别",width:10},
+                {field:"birthday",title:"出生日期",width:30},
+                {field:"tel",title:"电话",width:30},
+                {field:"qq",title:"QQ",width:30},
+                {field:"dormitory",title:"宿舍",width:30},
+                {field:"hometown",title:"家乡",width:30},
+                {field:"hobby",title:"爱好",width:30},
             ]],
             striped:true,
             pagination:true,
@@ -50,7 +55,7 @@
     <div style="height:30px;text-align: center;font-family: Microsoft Yahei; font-size: 22px; font-weight: 600;background-color: #FFFFFF">
         学生用户列表
     </div>
-    <div class="row" style="height:490px;background-color: #FFFFFF;margin-top: 8px">
+    <div class="row" style="height: 93%;background-color: #FFFFFF;margin-top: 8px">
         <div class="col-md-12">
             <div style="margin: 10px; padding-top: 10px ">
 
@@ -72,9 +77,9 @@
                     <input id="stu_ss" class="easyui-searchbox" style="width:300px"
                            data-options="searcher:stu_qq,prompt:'请您输入需要模糊查询的内容',menu:'#stu_mm'"></input>
                     <div id="stu_mm" style="width:120px">
-                        <div data-options="name:'name',iconCls:'icon-ok'">上师名</div>
-                        <%--<div data-options="name:'department',iconCls:'icon-ok'">部门</div>
-                        <div data-options="name:'address',iconCls:'icon-ok'">地址</div>--%>
+                        <%--<div data-options="name:'name',iconCls:'icon-ok'">上师名</div>--%>
+                        <%--<div data-options="name:'department',iconCls:'icon-ok'">部门</div>--%>
+                        <%--<div data-options="name:'address',iconCls:'icon-ok'">地址</div>--%>
                     </div>
 
                     <%--操作窗口--%>

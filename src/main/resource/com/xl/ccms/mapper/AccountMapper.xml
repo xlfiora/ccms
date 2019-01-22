@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.xl.ccms.dao.AccountDao">
+
+    <insert id="insertAccount">
+        insert into account
+        values(#{id},#{username},#{password},#{birthday},#{sex},
+        #{tel},#{qq},#{dormitory},#{hobby},#{hometown},#{photo},#{enterdate})
+    </insert>
+
+    <delete id="deleteAccount">
+        delete from account where id=#{id}
+    </delete>
+
+    <update id="updateAccount">
+        update account
+        <set>
+            <if test="username != null">
+                username = #{username}
+            </if>
+            <if test="password != null">
+                password = #{password}
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday}
+            </if>
+            <if test="sex != null">
+                sex = #{sex}
+            </if>
+            <if test="tel != null">
+                tel = #{tel}
+            </if>
+            <if test="qq != null">
+                qq = #{qq}
+            </if>
+            <if test="dormitory != null">
+                dormitory = #{dormitory}
+            </if>
+            <if test="hobby != null">
+                hobby = #{hobby}
+            </if>
+            <if test="hometown != null">
+                hometown = #{hometown}
+            </if>
+            <if test="photo != null">
+                photo = #{photo}
+            </if>
+            <if test="enterdate != null">
+                enterdate = #{enterdate}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectAccountById" resultType="Account">
+        select * from account where id=#{id}
+    </select>
+
+    <select id="selectAllAccount" resultType="Account">
+        select * from account
+    </select>
+     
+</mapper>
