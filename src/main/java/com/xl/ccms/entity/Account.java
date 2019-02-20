@@ -1,6 +1,7 @@
 package com.xl.ccms.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ public class Account {
     private String username;
     private String password;
     @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String sex;
     private String tel;
@@ -22,9 +24,11 @@ public class Account {
     private String hometown;
     private String photo;
     private String status;
-    @JSONField(format = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss ")
     private Date enterdate;
     private String type;
+    private String salt;
 
     public Account() {
 
@@ -148,5 +152,13 @@ public class Account {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

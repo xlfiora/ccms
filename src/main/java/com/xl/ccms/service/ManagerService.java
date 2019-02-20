@@ -11,4 +11,10 @@ import java.util.Map;
 public interface ManagerService {
 
     public Map<String,Object> queryManager(Page page, Account account);
+
+    public Integer addManager(Account account);
+
+    public Integer removeManager(String id);
+
+    public Integer modifyManager(Account account);
 }

@@ -1,5 +1,8 @@
 package com.xl.ccms.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -8,14 +11,15 @@ import java.util.Date;
 public class Club {
     private String id;
     private String clubName;
+    private String categoryId;
     private String founder;
     private String attached;
-    private String campus;
-    private Date createdate;
-    private String introduction;
+    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createDate;
     private Double dues;
-    private String emblem;
-    private String adviser;
+    private String introduction;
+
 
     public Club() {
 
@@ -37,6 +41,14 @@ public class Club {
         this.clubName = clubName;
     }
 
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public String getFounder() {
         return founder;
     }
@@ -53,28 +65,12 @@ public class Club {
         this.attached = attached;
     }
 
-    public String getCampus() {
-        return campus;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCampus(String campus) {
-        this.campus = campus;
-    }
-
-    public Date getCreatedate() {
-        return createdate;
-    }
-
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Double getDues() {
@@ -85,19 +81,11 @@ public class Club {
         this.dues = dues;
     }
 
-    public String getEmblem() {
-        return emblem;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setEmblem(String emblem) {
-        this.emblem = emblem;
-    }
-
-    public String getAdviser() {
-        return adviser;
-    }
-
-    public void setAdviser(String adviser) {
-        this.adviser = adviser;
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 }

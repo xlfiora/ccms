@@ -19,8 +19,7 @@
                 {field:"tel",title:"电话",width:30},
                 {field:"qq",title:"QQ",width:30},
                 {field:"dormitory",title:"宿舍",width:30},
-                {field:"hometown",title:"家乡",width:30},
-                {field:"hobby",title:"爱好",width:30},
+                {field:"enterdate",title:"创建日期",width:30},
             ]],
             striped:true,
             pagination:true,
@@ -34,14 +33,94 @@
             view: detailview,
             detailFormatter: function(rowIndex, rowData){
                 return '<table><tr>' +
-                    '<td style="border:0"><img src="upload/stu/' + rowData.stuPhoto + '" style="height:150px;"></td>' +
+                    '<td style="border:0"><img src="resource/student/' + rowData.photo + '" style="height:150px;"></td>' +
                     '</tr></table>';
             }
         });
 
+        //添加学生用户
+        $("#stu_add").linkbutton({
+            onClick:function(){
+                $("#stu_dd").dialog({
+                    title: '新增学生用户',
+                    width:360,
+                    height:200,
+                    modal: true,
+                    href:"${pageContext.request.contextPath}/jsp/student/addStudent.jsp", //包含子页面
+                });
+            },
+        });
+
+        //修改学生信息
+        $("#stu_modify").linkbutton({
+            onClick:function(){
+                var rowData = $("#stuList").datagrid("getSelected");
+                console.log(rowData);
+                $("#stu_dd").dialog({
+                    title: '修改学生信息',
+                    width:300,
+                    height:200,
+                    modal: true,
+                    href:"${pageContext.request.contextPath}/jsp/student/modifyStudent.jsp", //包含子页面
+                    onLoad:function(){
+                        $("#stu_mf").form("load",rowData); //在加载表单时将行数据加载到表单元素中
+                    }
+                });
+            },
+        });
+
+
+        //删除学生用户
+        $("#stu_remove").linkbutton({
+            onClick:function(){
+                var rowData = $("#stuList").datagrid("getSelected");
+                console.log(rowData);
+
+                $('#stu_confirm').dialog({
+                    title: '是否删除？',
+                    width: 400,
+                    height: 200,
+                    closed: false,
+                    cache: false,
+                    content:"你确定要删除吗？",
+                    modal: true,
+                    toolbar:[{
+
+                    }],
+                    buttons:[{
+                        text:'确认',
+                        iconCls:'icon-accept',
+                        handler:function(){
+                            $.ajax({
+                                type:"POST",
+                                url:"${pageContext.request.contextPath}/student/removeStudent",
+                                data:"id="+rowData.id,
+                                success: function(){
+                                    $("#stuList").datagrid('load',{
+
+                                    });
+                                    $("#stu_confirm").window("close");
+                                }
+                            });
+                        }
+                    },{
+                        text:'取消',
+                        iconCls:'icon-cancel',
+                        handler:function(){
+                            $("#stu_confirm").window("close");
+
+                        }
+                    }],
+                });
+
+            },
+
+        });
+
+
 
         function stu_qq(value, name) {
-            $("#stu_dg").datagrid('load',{
+            $("#stuList").datagrid('load',{
                 value:value,
                 name:name
             });
@@ -78,8 +157,8 @@
                            data-options="searcher:stu_qq,prompt:'请您输入需要模糊查询的内容',menu:'#stu_mm'"></input>
                     <div id="stu_mm" style="width:120px">
                         <%--<div data-options="name:'name',iconCls:'icon-ok'">上师名</div>--%>
-                        <%--<div data-options="name:'department',iconCls:'icon-ok'">部门</div>--%>
-                        <%--<div data-options="name:'address',iconCls:'icon-ok'">地址</div>--%>
+                            <%--<div data-options="name:'department',iconCls:'icon-ok'">部门</div>--%>
+                            <%--<div data-options="name:'address',iconCls:'icon-ok'">地址</div>--%>
                     </div>
 
                     <%--操作窗口--%>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.xl.ccms.dao.ClubDao">
+
+    <resultMap id="clubMap" type="com.xl.ccms.entity.Club">
+        <id column="id" property="id"/>
+        <result column="club_name" property="clubName"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="founder" property="founder"/>
+        <result column="attached" property="attached"/>
+        <result column="create_date" property="createDate"/>
+        <result column="dues" property="dues"/>
+        <result column="introduction" property="introduction"/>
+    </resultMap>
+
+
+    <insert id="insertClub">
+        insert into club
+        values(#{id},#{clubName},#{categoryId},#{founder},#{attached},#{createDate},#{dues},#{introduction})
+    </insert>
+
+    <delete id="deleteClub">
+        delete from club where id=#{id}
+    </delete>
+
+    <update id="updateClub">
+        update club
+        <set>
+            <if test="clubName != null">
+                club_name = #{clubName}
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId}
+            </if>
+            <if test="founder != null">
+                founder = #{founder}
+            </if>
+            <if test="attached != null">
+                attached = #{attached}
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate}
+            </if>
+            <if test="dues != null">
+                dues = #{dues}
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectClubById" resultMap="clubMap">
+        select * from club where id = #{id}
+    </select>
+
+    <select id="selectClubByPage" resultMap="clubMap">
+        select * from club
+        where 1=1
+            <if test="club.clubName != null">
+                and club_name =#{club.clubName}
+            </if>
+            <if test="club.categoryId !=null">
+                and category_id = #{club.categoryId}
+            </if>
+        limit #{page.startRows},#{page.singleRows}
+    </select>
+
+    <select id="countClubByCondition" resultType="java.lang.Integer">
+        select count(*) from club
+        where 1=1
+        <if test="clubName != null">
+            and club_name =#{club.clubName}
+        </if>
+        <if test="categoryId != null">
+            and category_id = #{club.categoryId}
+        </if>
+    </select>
+
+</mapper>

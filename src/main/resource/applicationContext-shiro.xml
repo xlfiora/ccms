@@ -6,15 +6,14 @@
     <!--shiro的过滤器工厂对象 负责权限的校验 处理请求的bean-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"></property>
-        <property name="loginUrl" value="/login.jsp"></property>
-        <property name="unauthorizedUrl" value="/error.jsp"></property>
+        <property name="loginUrl" value="/jsp/login.jsp"></property>
+        <property name="unauthorizedUrl" value="jsp/error.jsp"></property>
         <!--定义过滤器链的拦截规则-->
         <property name="filterChainDefinitions" >
-            <!--url=过滤器 anon auths user logout roles perms-->
+            <!--url=过滤器 anon authc user logout roles perms-->
             <value>
-                <!--/login.jsp=anon-->
-                <!--/register.jsp=anon-->
-                <!--/main.jsp=user-->
+                /jsp/login.jsp=anon
+                /jsp/main.jsp=authc
             </value>
         </property>
     </bean>

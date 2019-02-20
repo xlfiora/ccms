@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <title>校园社团管理系统主页</title>
@@ -16,12 +17,13 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
     <style type="text/css">
-        p {
+        #west p {
             text-align: center;
         }
 
-        p a{
+        #west p a{
             width: 100%;
         }
 
@@ -137,9 +139,9 @@
     <%--首部--%>
     <div data-options="region:'north',split:false" style="height:50px;background-color: #8d8d8d">
         <div style="font-size: 28px;color: #FAF7F7;font-family: 楷体;font-weight: 900;width: 500px;float:left;padding-left: 20px;padding-top: 10px" >校园社团管理系统</div>
-        <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">${a}欢迎您：${sessionScope.managerName} &nbsp;
+        <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 500px;float:right;padding-top:15px">欢迎您：${sessionScope.account.username} &nbsp;
             <a href="${pageContext.request.contextPath}/manager/modifyManager" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
-            <a href="${pageContext.request.contextPath}/login.jsp" class="easyui-linkbutton" data-options="iconCls:'icon-01'">退出系统</a>
+            <a href="${pageContext.request.contextPath}/jsp/login.jsp" class="easyui-linkbutton" data-options="iconCls:'icon-01'">退出系统</a>
         </div>
     </div>
 
@@ -147,41 +149,58 @@
     <div data-options="region:'west',title:'导航菜单',split:false" style="width:220px;">
         <div id="west" class="easyui-accordion" data-options="fit:false">
 
+            <shiro:hasRole name="user">
             <%--用户功能--%>
             <div title="我的信息" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('个人信息','student/personInfo.jsp','icon-help')">个人信息</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('修改个人信息','student/modifyPersonInfo.jsp','icon-help')">修改个人信息</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('个人信息','student/myInfo.jsp','icon-help')">个人信息</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('修改个人信息','student/modifyMyInfo.jsp','icon-help')">修改个人信息</a></p>
             </div>
+            </shiro:hasRole>
 
+            <shiro:hasRole name="user">
             <div title="我的社团" data-options="iconCls:'icon-help'" style="padding:10px;">
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团报名','student/chooseClub.jsp','icon-help')">社团报名</a></p>
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('已参加社团','student/myClub.jsp','icon-help')">已参加社团</a></p>
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动','student/myActivity.jsp','icon-help')">社团活动</a></p>
             </div>
+            </shiro:hasRole>
 
             <%--管理员功能--%>
+            <shiro:hasAnyRoles name="admin,root">
             <div title="用户管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('学生信息管理','manager/studentList.jsp','icon-help')">学生信息管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('学生信息管理','student/studentList.jsp','icon-help')">学生信息管理</a></p>
+                <shiro:hasRole name="root">
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('管理员管理','manager/managerList.jsp','icon-help')">管理员管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('角色管理','role/role.jsp','icon-help')">角色管理</a></p>
+                </shiro:hasRole>
+                <shiro:hasRole name="root">
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('角色管理','role/roleInfoList.jsp','icon-help')">角色管理</a></p>
+                </shiro:hasRole>
             </div>
+            </shiro:hasAnyRoles>
 
+            <shiro:hasAnyRoles name="admin,root">
             <div title="社团管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团信息管理','manager/clubList.jsp','icon-help')">社团信息管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团信息管理','club/clubList.jsp','icon-help')">社团信息管理</a></p>
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团报名管理','manager/enrollList.jsp','icon-help')">社团报名管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动管理','manager/activityList.jsp','icon-help')">社团活动管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动管理','club/activityList.jsp','icon-help')">社团活动管理</a></p>
             </div>
+            </shiro:hasAnyRoles>
 
+            <shiro:hasAnyRoles name="admin,root">
             <div title="统计管理" data-options="iconCls:'icon-help'" style="padding:10px;">
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('用户统计','count/stuCount.jsp','icon-help')">用户统计</a></p>
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团统计','count/clubCount.jsp','icon-help')">社团统计</a></p>
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动统计','count/activityCount.jsp','icon-help')">社团活动统计</a></p>
             </div>
+            </shiro:hasAnyRoles>
 
+            <shiro:hasAnyRoles name="admin,root">
             <div title="系统日志管理" data-options="iconCls:'icon-help'" style="padding:10px;">
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('系统操作日志','log/actionLog.jsp','icon-help')">系统操作日志</a></p>
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('系统登录日志','log/loginLog.jsp','icon-help')">系统登录日志</a></p>
             </div>
+            </shiro:hasAnyRoles>
+
 
         </div>
     </div>
@@ -195,11 +214,11 @@
                         <div id="outer">
                             <div id="inner">
                                 <div id="demo1">
-                                    <img src="image/shouye/1.jpg">
-                                    <img src="image/shouye/2.jpg">
-                                    <img src="image/shouye/3.jpg">
-                                    <img src="image/shouye/4.jpg">
-                                    <img src="image/shouye/5.jpg">
+                                    <img src="../image/shouye/1.jpg">
+                                    <img src="../image/shouye/2.jpg">
+                                    <img src="../image/shouye/3.jpg">
+                                    <img src="../image/shouye/4.jpg">
+                                    <img src="../image/shouye/5.jpg">
                                 </div>
                                 <div id="demo2">
                                 </div>

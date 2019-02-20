@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
-<mapper namespace="com.xl.ccms.dao.StudentDao">
+<mapper namespace="com.xl.ccms.dao.ManagerDao">
 
     <resultMap id="AccountMap" type="com.xl.ccms.entity.Account" >
         <id column="ID" property="id" jdbcType="VARCHAR" />
@@ -21,33 +21,33 @@
         <result column="SALT" property="salt"/>
     </resultMap>
 
-    <select id="selectStudentByPage" resultMap="AccountMap">
+    <select id="selectManagerByPage" resultMap="AccountMap">
         select * from account
-        where type='0' and 1=1
+        where type='1' and 1=1
         <if test="account.stuId != null">
-            and stu_id = #{account.stuId}
+            and stu_id = #{stuId}
         </if>
         limit #{page.startRows},#{page.singleRows}
     </select>
 
-    <select id="countStudentByCondition" resultType="java.lang.Integer">
+    <select id="countManagerByCondition" resultType="java.lang.Integer">
         select count(*) from account
-        where type='0' and 1=1
+        where type='1' and 1=1
         <if test="stuId != null">
             and stu_id = #{stuId}
         </if>
     </select>
 
-    <insert id="insertStudent">
-        insert into account(id,stu_id,username,password,photo,enter_date,type,salt)
-        value(#{id},#{stuId},#{username},#{password},#{photo},#{enterdate},#{type},#{salt})
+    <insert id="insertManager">
+        insert into account(id,stu_id,username,password,tel,enter_date,type,salt)
+        value(#{id},#{stuId},#{username},#{password},#{tel},#{enterdate},#{type},#{salt})
     </insert>
 
-    <delete id="deleteStudent">
+    <delete id="deleteManager">
         delete from account where id = #{id}
     </delete>
 
-    <update id="updateStudent">
+    <update id="updateManager">
         update account
         <set>
             <if test="username != null">

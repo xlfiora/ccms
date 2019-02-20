@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.xl.ccms.dao.RoleDao">
+
+    <resultMap id="RoleInfoMap" type="com.xl.ccms.entity.RoleInfo">
+        <id property="id" column="id"/>
+        <result property="accountId" column="accountId"/>
+        <result property="username" column="username"/>
+        <result property="roleId" column="roleId"/>
+        <result property="roleName" column="roleName"/>
+        <result property="roleTag" column="roleTag"/>
+    </resultMap>
+
+    <insert id="insertRole">
+        insert into account_role values(#{id},#{accountId},#{roleId})
+    </insert>
+
+    <delete id="deleteRole">
+        delete from account_role where account_id = #{accountId}
+    </delete>
+
+    <select id="selectRoleInfo" resultMap="RoleInfoMap">
+        select ar.id as id,a.id as accountId,a.username as username,r.roleId as roleId,r.roleName as roleName,r.roleTag roleTag
+        from account_role ar left join account a
+        on ar.account_id = a.id
+        left join role r
+        on ar.role_id = r.roleId
+        limit #{page.startRows},#{page.singleRows}
+    </select>
+
+    <select id="countRoleInfo" resultType="java.lang.Integer">
+        select count(ar.id)
+        from account_role ar left join account a
+        on ar.account_id = a.id
+        left join role r
+        on ar.role_id = r.roleId
+    </select>
+
+
+
+</mapper>

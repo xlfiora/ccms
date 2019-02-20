@@ -1,8 +1,10 @@
 package com.xl.ccms.service;
 
 import com.xl.ccms.entity.Club;
+import com.xl.ccms.entity.Page;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2019/1/16.
@@ -15,8 +17,8 @@ public interface ClubService {
 
     public Integer modifyClub(Club club);
 
-    public Club queryClub(String id);
+    public Club queryClubById(String id);
 
-    public List<Club> queryAllClub();
+    public Map<String,Object> queryAllClub(Page page,Club club);
 
 }

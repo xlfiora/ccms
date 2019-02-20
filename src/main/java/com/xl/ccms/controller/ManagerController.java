@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -32,5 +33,35 @@ public class ManagerController {
 
         return managerService.queryManager(page,account);
     }
+
+    @RequestMapping("/addManager")
+    public @ResponseBody void addManager(String stuId,String username,String password,String tel){
+
+        Account account = new Account();
+        account.setType("1");
+        account.setId(stuId);
+        account.setStuId(stuId);
+        account.setUsername(username);
+        account.setPassword(password);
+        account.setTel(tel);
+        account.setEnterdate(new Date());
+        Integer result = managerService.addManager(account);
+
+    }
+
+    @RequestMapping("/removeManager")
+    public @ResponseBody void removeManager(String id){
+        managerService.removeManager(id);
+    }
+
+    @RequestMapping("/modifyManager")
+    public @ResponseBody void modifyManager(String id,String username,String tel){
+        Account account = new Account();
+        account.setId(id);
+        account.setUsername(username);
+        account.setTel(tel);
+        managerService.modifyManager(account);
+    }
+
 
 }

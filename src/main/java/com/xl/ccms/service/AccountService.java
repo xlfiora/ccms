@@ -1,6 +1,7 @@
 package com.xl.ccms.service;
 
 import com.xl.ccms.entity.Account;
+import com.xl.ccms.entity.Role;
 
 import java.util.List;
 
@@ -15,8 +16,10 @@ public interface AccountService {
 
     public Integer modifyAccount(Account account);
 
-    public Account queryAccount(String id);
+    public Account queryAccountById(String id);
 
     public List<Account> queryAllAccount();
+
+    public List<Role> queryRoleById(String id);
 
 }

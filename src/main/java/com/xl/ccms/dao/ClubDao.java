@@ -1,6 +1,8 @@
 package com.xl.ccms.dao;
 
 import com.xl.ccms.entity.Club;
+import com.xl.ccms.entity.Page;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,7 +17,9 @@ public interface ClubDao {
 
     public Integer updateClub(Club club);
 
-    public Club selectClub(String id);
+    public Club selectClubById(String id);
 
-    public List<Club> selectAllClub();
+    public List<Club> selectClubByPage(@Param("page") Page page, @Param("club") Club club);
+
+    public Integer countClubByCondition(Club club);
 }

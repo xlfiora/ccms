@@ -15,5 +15,10 @@ public interface StudentDao {
 
     public Integer countStudentByCondition(Account account);
 
+    public Integer insertStudent(Account account);
+
+    public Integer deleteStudent(String id);
+
+    public Integer updateStudent(Account account);
 
 }

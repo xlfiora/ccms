@@ -1,6 +1,7 @@
 package com.xl.ccms.dao;
 
 import com.xl.ccms.entity.Account;
+import com.xl.ccms.entity.Role;
 
 import java.util.List;
 
@@ -15,8 +16,10 @@ public interface AccountDao {
 
     public Integer updateAccount(Account account);
 
-    public Account selectAccount(String id);
+    public Account selectAccountById(String id);
 
     public List<Account> selectAllAccount();
+
+    public List<Role> selectRoleById(String id);
 
 }

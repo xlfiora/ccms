@@ -14,4 +14,10 @@ public interface ManagerDao {
     List<Account> selectManagerByPage(@Param("page") Page page, @Param("account") Account account);
 
     Integer countManagerByCondition(Account account);
+
+    public Integer insertManager(Account account);
+
+    public Integer deleteManager(String id);
+
+    public Integer updateManager(Account account);
 }
