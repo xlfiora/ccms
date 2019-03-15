@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.xl.ccms.dao.RegisterInfoDao">
+
+    <resultMap id="RegisterInfoMap" type="com.xl.ccms.entity.RegisterInfo" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="account_id" property="accountId"/>
+        <result column="club_id" property="clubId"/>
+        <result column="username" property="accountName"/>
+        <result column="club_name" property="clubName"/>
+        <result column="status" property="status"/>
+        <result column="register_date" property="registerDate"/>
+    </resultMap>
+
+    <select id="selectByPage" resultMap="RegisterInfoMap">
+        select ac.id id,ac.account_id account_id,ac.club_id club_id,
+        a.username username,c.club_name club_name,ac.status status,ac.register_date register_date
+        from account_club ac left join account a
+        on ac.account_id = a.id
+        left join club c
+        on ac.club_id = c.id
+        where 1=1
+        <if test="registerInfo.id != null">
+            and ac.id = #{registerInfo.id}
+        </if>
+        <if test="registerInfo.accountId != null">
+            and a.stu_id like CONCAT('%',#{registerInfo.accountId},'%')
+        </if>
+        <if test="registerInfo.accountName != null">
+            and a.username like CONCAT('%',#{registerInfo.accountName},'%')
+        </if>
+        <if test="registerInfo.clubName != null">
+            and c.club_name like CONCAT('%',#{registerInfo.clubName},'%')
+        </if>
+        <if test="registerInfo.status != null and registerInfo.status !='' ">
+            and ac.status = #{registerInfo.status}
+        </if>
+        limit #{page.startRows},#{page.singleRows}
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(ac.id)
+        from account_club ac left join account a
+        on ac.account_id = a.id
+        left join club c
+        on ac.club_id = c.id
+        where 1=1
+        <if test="registerInfo.id != null">
+            and ac.id = #{registerInfo.id}
+        </if>
+        <if test="registerInfo.accountId != null">
+            and a.stu_id like CONCAT('%',#{registerInfo.accountId},'%')
+        </if>
+        <if test="registerInfo.accountName != null">
+            and a.username like CONCAT('%',#{registerInfo.accountName},'%')
+        </if>
+        <if test="registerInfo.clubName != null">
+            and c.club_name like CONCAT('%',#{registerInfo.clubName},'%')
+        </if>
+        <if test="registerInfo.status != null">
+            and ac.status = #{registerInfo.status}
+        </if>
+    </select>
+
+    <insert id="insertRegisterInfo">
+        insert into account_club values(#{id},#{accountId},#{clubId},#{status},#{registerDate})
+    </insert>
+
+    <delete id="deleteRegisterInfo">
+        delete from account_club where account_id = #{id}
+    </delete>
+
+    <update id="updateRegisterInfo">
+        update account_club
+        <set>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>

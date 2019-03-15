@@ -7,12 +7,18 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"></property>
         <property name="loginUrl" value="/jsp/login.jsp"></property>
-        <property name="unauthorizedUrl" value="jsp/error.jsp"></property>
+        <property name="unauthorizedUrl" value="/jsp/error.jsp"></property>
         <!--定义过滤器链的拦截规则-->
         <property name="filterChainDefinitions" >
             <!--url=过滤器 anon authc user logout roles perms-->
             <value>
                 /jsp/login.jsp=anon
+                /jsp/club/*=anon
+                /jsp/count/*=anon
+                /jsp/log/*=anon
+                /jsp/manager/*=anon
+                /jsp/role/*=anon
+                /jsp/student/*=anon
                 /jsp/main.jsp=authc
             </value>
         </property>

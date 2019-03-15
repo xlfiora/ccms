@@ -22,4 +22,8 @@ public interface AccountService {
 
     public List<Role> queryRoleById(String id);
 
+    public List<Integer> countByType();
+
+    public List<Integer> countBySex();
+
 }

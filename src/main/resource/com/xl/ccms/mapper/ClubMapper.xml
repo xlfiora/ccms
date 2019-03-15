@@ -59,7 +59,7 @@
         select * from club
         where 1=1
             <if test="club.clubName != null">
-                and club_name =#{club.clubName}
+                and club_name like CONCAT('%',#{club.clubName},'%')
             </if>
             <if test="club.categoryId !=null">
                 and category_id = #{club.categoryId}
@@ -70,12 +70,36 @@
     <select id="countClubByCondition" resultType="java.lang.Integer">
         select count(*) from club
         where 1=1
-        <if test="clubName != null">
-            and club_name =#{club.clubName}
+        <if test="club.clubName != null">
+            and club_name like CONCAT('%',#{club.clubName},'%')
         </if>
-        <if test="categoryId != null">
+        <if test="club.categoryId != null">
             and category_id = #{club.categoryId}
         </if>
     </select>
+
+
+    <select id="countClubCategory" resultType="com.xl.ccms.entity.EchartResult">
+        select  c1.category_name name,count(c2.id) value
+        from category c1 left join club c2
+        on c1.id = c2.category_id
+        group by c1.id
+    </select>
+
+    <select id="countClubUnApprove" resultType="com.xl.ccms.entity.EchartResult">
+        select c.club_name name,sum(case when ac.status='0' then 1 else 0 end) as value
+        from club c left join account_club ac
+        on c.id =ac.club_id
+        group by c.club_name
+    </select>
+
+    <select id="countClubApprove" resultType="com.xl.ccms.entity.EchartResult">
+        select c.club_name name,sum(case when ac.status='1' then 1 else 0 end) as value
+        from club c left join account_club ac
+        on c.id =ac.club_id
+        group by c.club_name
+    </select>
+
+
 
 </mapper>

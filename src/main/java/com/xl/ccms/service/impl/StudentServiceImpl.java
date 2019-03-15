@@ -1,5 +1,6 @@
 package com.xl.ccms.service.impl;
 
+import com.xl.ccms.dao.RegisterInfoDao;
 import com.xl.ccms.dao.RoleDao;
 import com.xl.ccms.dao.StudentDao;
 import com.xl.ccms.entity.Account;
@@ -29,6 +30,9 @@ public class StudentServiceImpl implements StudentService{
     @Autowired
     private RoleDao roleDao;
 
+    @Autowired
+    private RegisterInfoDao registerInfoDao;
+
     @Override
     public Map<String,Object> queryAllStu(Page page, Account account) {
 
@@ -52,11 +56,16 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public Integer removeStudent(String id) {
-        return studentDao.deleteStudent(id)+roleDao.deleteRole(id);
+        return studentDao.deleteStudent(id)+roleDao.deleteRole(id)+registerInfoDao.deleteRegisterInfo(id);
     }
 
     @Override
     public Integer modifyStudent(Account account) {
         return studentDao.updateStudent(account);
+    }
+
+    @Override
+    public List<Account> queryAll() {
+        return studentDao.selectAll();
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Integer modifyAccount(Account account) {
-        return null;
+        return accountDao.updateAccount(account);
     }
 
     @Override
@@ -51,5 +52,42 @@ public class AccountServiceImpl implements AccountService {
 
     }
 
+    @Override
+    public List<Integer> countByType() {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        Account account = new Account();
+        account.setType("0");
+        Integer userNumber = accountDao.countByCondition(account);
+        list.add(userNumber);
+
+        account.setType("1");
+        Integer adminNumber = accountDao.countByCondition(account);
+        list.add(adminNumber);
+
+        account.setType("9");
+        Integer rootNumber = accountDao.countByCondition(account);
+        list.add(rootNumber);
+
+
+        return list;
+    }
+
+    @Override
+    public List<Integer> countBySex() {
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        Account account = new Account();
+        account.setSex("男");
+        Integer manNumber = accountDao.countByCondition(account);
+        list.add(manNumber);
+
+        account.setSex("女");
+        Integer womanNumber = accountDao.countByCondition(account);
+        list.add(womanNumber);
+
+        return list;
+    }
 
 }

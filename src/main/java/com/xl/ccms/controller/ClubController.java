@@ -54,11 +54,10 @@ public class ClubController {
     }
 
     @RequestMapping("/uploadFiles")
-    public @ResponseBody
-    RichTextResult uploadFiles(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) throws IOException {
+    public @ResponseBody RichTextResult uploadFiles(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) throws IOException {
 
         RichTextResult result = new RichTextResult();
-        ArrayList<String> data= new ArrayList<String>();
+        ArrayList<String> data= new ArrayList<>();
 
         try {
             if(files!=null && files.length!=0 ){
@@ -67,16 +66,10 @@ public class ClubController {
                     String[] s = fileName.split("\\.");
                     String newName = (new SimpleDateFormat("yyyyMMddHHmmssSSS")).format(new Date());
                     fileName = newName + "." + s[1];
-
                     String realPath = request.getSession().getServletContext().getRealPath("/");
-
                     String uploadPath = realPath.replace("ccms\\", "resource\\club\\") + fileName;
                     file.transferTo(new File(uploadPath));
-
-
-
                     data.add("resource/club/"+fileName);
-
                 }
             }
             //处理响应
@@ -119,16 +112,29 @@ public class ClubController {
     }
 
     @RequestMapping("/queryAllClub")
-    public @ResponseBody Map<String,Object> queryAllClub(@RequestParam("page")Integer nowPage, @RequestParam("rows")Integer pageSize){
+    public @ResponseBody Map<String,Object> queryAllClub(@RequestParam("page")Integer nowPage, @RequestParam("rows")Integer pageSize,String clubName){
 
         Page page = new Page();
         page.setPageIndex(nowPage);
         page.setSingleRows(pageSize);
 
         Club club = new Club();
+        club.setClubName(clubName);
 
         return clubService.queryAllClub(page,club);
 
+    }
+
+
+    @RequestMapping("/countClubCategory")
+    public @ResponseBody Map<String,Object> countClubCategory(){
+        return clubService.countClubCategory();
+    }
+
+
+    @RequestMapping("/countClubRegister")
+    public @ResponseBody Map<String,Object> countClubRegister(){
+        return clubService.countClubRegisterInfo();
     }
 
 }

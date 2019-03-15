@@ -8,6 +8,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2019/1/9.
@@ -84,7 +88,49 @@ public class AccountController {
         return false;
     }
 
+    @RequestMapping("/modifyPassword")
+    public @ResponseBody Integer modifyPassword(String oldPsw,String newPsw,HttpSession session){
+
+        Account account = (Account) session.getAttribute("account");
 
 
+        if (account.getPassword().equals(new Md5Hash(oldPsw,account.getSalt(),1024).toString())){
+            Account newAccount = new Account();
+            newAccount.setId(account.getId());
+            newAccount.setPassword(new Md5Hash(newPsw,account.getSalt(),1024).toString());
+            if(accountService.modifyAccount(newAccount)>0){
+                account.setPassword(new Md5Hash(newPsw,account.getSalt(),1024).toString());
+                session.setAttribute("account",account);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+
+    @RequestMapping("/countAccountType")
+    public @ResponseBody Map<String,Object> countAccountType(){
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        List<Integer> list = accountService.countByType();
+
+        map.put("value",list);
+
+        return map;
+    }
+
+    @RequestMapping("/countAccountSex")
+    public @ResponseBody Map<String,Object> countAccountSex(){
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        List<Integer> list = accountService.countBySex();
+
+        map.put("value",list);
+
+        return map;
+
+    }
 
 }

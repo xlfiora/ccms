@@ -6,14 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-
 <script type="text/javascript">
     $(function () {
         $("#clubList").datagrid({
             url:"${pageContext.request.contextPath}/club/queryAllClub",
             columns:[[
                 {field:"clubName",title:"社团名称",width:30},
-                {field:"categoryId",title:"社团名称",width:30,formatter:function (value,row,index) {
+                {field:"categoryId",title:"社团类型",width:30,formatter:function (value,row,index) {
                     if(value=='1'){
                         return '体育类';
                     }else if(value=='2'){
@@ -29,7 +28,12 @@
                 {field:"founder",title:"创始人",width:20},
                 {field:"createDate",title:"创建日期",width:30},
                 {field:"attached",title:"挂靠单位",width:30},
-                {field:"dues",title:"会费",width:30}
+                {field:"dues",title:"会费",width:30},
+                {field:"operate",title:"查看详情",width:30,
+                    formatter:function(value,rowData,rowIndex) {
+                        return "<a href='#' onclick='showDetail("+rowIndex+")'>查看详情</a>";
+                    },
+                }
             ]],
             striped:true,
             pagination:true,
@@ -40,12 +44,6 @@
             singleSelect:true,
             remoteSort:false,
             nowrap:false,
-            view: detailview,
-            detailFormatter: function(rowIndex,rowData){
-                return '<table><tr>' +
-                    '<td style="border:0"><div>'+rowData.introduction+'</div></td>' +
-                    '</tr></table>';
-            }
         });
 
         //添加
@@ -122,11 +120,32 @@
                         }
                     }],
                 });
-
             },
-
         });
     });
+
+    function showDetail(rowIndex) {
+        $('#clubList').datagrid('selectRow',rowIndex);// 关键在这里
+        var rowData = $('#clubList').datagrid('getSelected');
+        console.log(rowData);
+        $("#club_dd").dialog({
+            title: '社团简介',
+            width:800,
+            height:600,
+            modal: true,
+            href:"${pageContext.request.contextPath}/jsp/club/showDetail.jsp", //包含子页面
+            onLoad:function(){
+                $("#detail_clubName").text(rowData.clubName);
+                $("#detail_introduction").html(rowData.introduction);
+            }
+        });
+    }
+
+    function searchClub() {
+        $("#clubList").datagrid('load',{
+            clubName:$("#search_clubName").val(),
+        });
+    }
 </script>
 
 <div class="container" style="background-color:#CCCCCC;padding: 10px">
@@ -142,12 +161,17 @@
 
                 <%--操作栏--%>
                 <div id="club_tb" style="display: none;">
-                    <a id="club_modify" class="easyui-linkbutton"
-                       data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a>
+                    <%--<a id="club_modify" class="easyui-linkbutton"--%>
+                       <%--data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a>--%>
                     <a id="club_add" class="easyui-linkbutton"
                        data-options="iconCls:'icon-add',plain:true,text:'新增'"></a>
                     <a id="club_remove" class="easyui-linkbutton"
                        data-options="iconCls:'icon-cancel',plain:true,text:'删除'"></a>
+                    <div style="float: right">
+                        <input type="text" id="search_clubName" placeholder="请输入社团名称">
+                        <a id="club_search" class="easyui-linkbutton"
+                           data-options="iconCls:'icon-search',plain:true,text:'查询'" onclick="searchClub()"></a>
+                    </div>
                     <%--操作窗口--%>
                     <div id="club_dd"></div>
 

@@ -13,12 +13,12 @@ public interface RegisterInfoDao {
 
     public Integer insertRegisterInfo(RegisterInfo registerInfo);
 
-    public Integer deleteRegisterInfo();
+    public Integer deleteRegisterInfo(String id);
 
     public Integer updateRegisterInfo(RegisterInfo registerInfo);
 
     public List<RegisterInfo> selectByPage(@Param("page") Page page, @Param("registerInfo") RegisterInfo registerInfo);
 
-    public Integer countByCondition(RegisterInfo registerInfo);
+    public Integer countByCondition(@Param("registerInfo") RegisterInfo registerInfo);
 
 }

@@ -18,6 +18,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-detailview.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
     <style type="text/css">
         #west p {
             text-align: center;
@@ -31,21 +32,21 @@
 
         #inner img {
             width:300px;
-            height:240px;
+            height:400px;
             float:left;
         }
         #outer {
             margin-top: 50px;
             margin:auto;
             width:900px;
-            height:240px;
+            height:400px;
             border:2px solid #52d689;
             overflow:hidden;
             /*把多余的部分隐藏掉*/
         }
         #inner {
             width:3000px;
-            height:240px;
+            height:400px;
         }
         #inner div {
             float:left;
@@ -53,6 +54,28 @@
 
     </style>
     <script type="text/javascript">
+
+        $(function () {
+
+            //修改学生信息
+            $("#modify_password").linkbutton({
+                onClick:function(){
+
+                    $("#main_dd").dialog({
+                        title: '修改密码',
+                        width:300,
+                        height:200,
+                        modal: true,
+                        href:"${pageContext.request.contextPath}/jsp/account/modifyPassword.jsp", //包含子页面
+                    });
+                },
+            });
+
+
+        })
+
+
+
         function addTab(menuName,menuUrl,menuIcon) {
             var flag =$("#center").tabs("exists",menuName);
             if (flag){
@@ -140,7 +163,7 @@
     <div data-options="region:'north',split:false" style="height:50px;background-color: #8d8d8d">
         <div style="font-size: 28px;color: #FAF7F7;font-family: 楷体;font-weight: 900;width: 500px;float:left;padding-left: 20px;padding-top: 10px" >校园社团管理系统</div>
         <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 500px;float:right;padding-top:15px">欢迎您：${sessionScope.account.username} &nbsp;
-            <a href="${pageContext.request.contextPath}/manager/modifyManager" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
+            <a id="modify_password" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
             <a href="${pageContext.request.contextPath}/jsp/login.jsp" class="easyui-linkbutton" data-options="iconCls:'icon-01'">退出系统</a>
         </div>
     </div>
@@ -151,53 +174,51 @@
 
             <shiro:hasRole name="user">
             <%--用户功能--%>
-            <div title="我的信息" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('个人信息','student/myInfo.jsp','icon-help')">个人信息</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('修改个人信息','student/modifyMyInfo.jsp','icon-help')">修改个人信息</a></p>
+            <div title="我的信息" data-options="iconCls:'icon-user'" style="padding:10px;">
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-vcard',plain:true" onclick="addTab('个人信息','student/myInfo.jsp','icon-vcard')">个人信息</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-vcard_edit',plain:true" onclick="addTab('修改个人信息','student/modifyMyInfo.jsp','icon-vcard_edit')">修改个人信息</a></p>
             </div>
             </shiro:hasRole>
 
             <shiro:hasRole name="user">
-            <div title="我的社团" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团报名','student/chooseClub.jsp','icon-help')">社团报名</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('已参加社团','student/myClub.jsp','icon-help')">已参加社团</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动','student/myActivity.jsp','icon-help')">社团活动</a></p>
+            <div title="我的社团" data-options="iconCls:'icon-qwe3334343'" style="padding:10px;">
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-house',plain:true" onclick="addTab('社团报名','club/chooseClub.jsp','icon-house')">社团报名</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-house_go',plain:true" onclick="addTab('社团活动','club/myApply.jsp','icon-house_go')">申请中社团</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-house_link',plain:true" onclick="addTab('已参加社团','club/myClub.jsp','icon-house_link')">已参加社团</a></p>
             </div>
             </shiro:hasRole>
 
             <%--管理员功能--%>
             <shiro:hasAnyRoles name="admin,root">
-            <div title="用户管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('学生信息管理','student/studentList.jsp','icon-help')">学生信息管理</a></p>
+            <div title="用户管理" data-options="iconCls:'icon-user_home'" style="padding:10px;">
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-user_b',plain:true" onclick="addTab('学生信息管理','student/studentList.jsp','icon-user_b')">学生信息管理</a></p>
                 <shiro:hasRole name="root">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('管理员管理','manager/managerList.jsp','icon-help')">管理员管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-user_brown',plain:true" onclick="addTab('管理员管理','manager/managerList.jsp','icon-user_brown')">管理员管理</a></p>
                 </shiro:hasRole>
                 <shiro:hasRole name="root">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('角色管理','role/roleInfoList.jsp','icon-help')">角色管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-user_key',plain:true" onclick="addTab('角色管理','role/roleInfoList.jsp','icon-user_key')">角色管理</a></p>
                 </shiro:hasRole>
             </div>
             </shiro:hasAnyRoles>
 
             <shiro:hasAnyRoles name="admin,root">
-            <div title="社团管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团信息管理','club/clubList.jsp','icon-help')">社团信息管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团报名管理','manager/enrollList.jsp','icon-help')">社团报名管理</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动管理','club/activityList.jsp','icon-help')">社团活动管理</a></p>
+            <div title="社团管理" data-options="iconCls:'icon-sport_soccer'" style="padding:10px;">
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-home',plain:true" onclick="addTab('社团信息管理','club/clubList.jsp','icon-home')">社团信息管理</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-group_edit',plain:true" onclick="addTab('社团报名管理','club/registerInfoList.jsp','icon-group_edit')">社团报名管理</a></p>
             </div>
             </shiro:hasAnyRoles>
 
             <shiro:hasAnyRoles name="admin,root">
-            <div title="统计管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('用户统计','count/stuCount.jsp','icon-help')">用户统计</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团统计','count/clubCount.jsp','icon-help')">社团统计</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('社团活动统计','count/activityCount.jsp','icon-help')">社团活动统计</a></p>
+            <div title="统计管理" data-options="iconCls:'icon-graph'" style="padding:10px;">
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-people',plain:true" onclick="addTab('用户统计','count/accountCount.jsp','icon-people')">用户统计</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-report',plain:true" onclick="addTab('社团统计','count/clubCount.jsp','icon-report')">社团统计</a></p>
             </div>
             </shiro:hasAnyRoles>
 
             <shiro:hasAnyRoles name="admin,root">
-            <div title="系统日志管理" data-options="iconCls:'icon-help'" style="padding:10px;">
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('系统操作日志','log/actionLog.jsp','icon-help')">系统操作日志</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('系统登录日志','log/loginLog.jsp','icon-help')">系统登录日志</a></p>
+            <div title="系统日志管理" data-options="iconCls:'icon-laptop_disk'" style="padding:10px;">
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-laptop_edit',plain:true" onclick="addTab('系统操作日志','log/actionLog.jsp','icon-laptop_edit')">系统操作日志</a></p>
+                <%--<p><a class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true" onclick="addTab('系统登录日志','log/loginLog.jsp','icon-help')">系统登录日志</a></p>--%>
             </div>
             </shiro:hasAnyRoles>
 
@@ -210,6 +231,11 @@
         <div id="center" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
             <div title="主页" data-options="iconCls:'icon-neighbourhood',">
                 <div class="container">
+
+                    <div style="width: 100%;height: 100px;text-align: center">
+                        <p style="font-size: 68px;color: #63B8FF;font-family: STHupo;font-weight: 900;">欢迎使用校园社团管理系统</p>
+                    </div>
+
                     <div style="padding-top: 50px">
                         <div id="outer">
                             <div id="inner">
@@ -224,25 +250,22 @@
                                 </div>
                             </div>
                         </div>
-                        <%--<div style="text-align: center;height: auto">--%>
-                            <%--<div style="text-align: center;float: left">--%>
-                                <%--<input type="button" onmouseover="clock()" value="向前翻">--%>
-                            <%--</div>--%>
-                            <%--&nbsp;&nbsp;&nbsp;&nbsp;--%>
-                            <%--<div style="text-align: center;float: left">--%>
-                                <%--<input type="button" onmouseover="clock2()" value="向后翻">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 
+
+
     <%--底部--%>
     <div data-options="region:'south',split:false" style="height: 25px;background-color: #8d8d8d">
         <div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体" >&copy;校园社团管理系统 www.ccms.com</div>
     </div>
+
+    <div id="main_dd"></div>
 
 </body>
 </html>

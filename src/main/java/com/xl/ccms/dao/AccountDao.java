@@ -22,4 +22,6 @@ public interface AccountDao {
 
     public List<Role> selectRoleById(String id);
 
+    public Integer countByCondition(Account account);
+
 }

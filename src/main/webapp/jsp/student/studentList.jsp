@@ -117,17 +117,21 @@
 
         });
 
-
-
-        function stu_qq(value, name) {
-            $("#stuList").datagrid('load',{
-                value:value,
-                name:name
-            });
-        }
-
-
+        $("#stu_export").linkbutton({
+            onClick:function(){
+                window.location.href="${pageContext.request.contextPath}/student/exportExcel";
+            },
+        });
     });
+
+    function searchStudent() {
+        $("#stuList").datagrid('load',{
+            stuId:$("#search_stuId").val(),
+            username:$("#search_username").val(),
+        });
+    }
+
+
 </script>
 
 <div class="container" style="background-color:#CCCCCC;padding: 10px">
@@ -149,18 +153,18 @@
                        data-options="iconCls:'icon-add',plain:true,text:'新增'"></a>
                     <a id="stu_remove" class="easyui-linkbutton"
                        data-options="iconCls:'icon-cancel',plain:true,text:'删除'"></a>
-                    <a id="stu_adds" class="easyui-linkbutton"
-                       data-options="iconCls:'icon-disk_upload',plain:true,text:'批量插入'"></a>
+                    <%--<a id="stu_adds" class="easyui-linkbutton"--%>
+                       <%--data-options="iconCls:'icon-disk_upload',plain:true,text:'批量插入'"></a>--%>
                     <a id="stu_export" class="easyui-linkbutton"
                        data-options="iconCls:'icon-disk_download',plain:true,text:'导出Excel'"></a>
-                    <input id="stu_ss" class="easyui-searchbox" style="width:300px"
-                           data-options="searcher:stu_qq,prompt:'请您输入需要模糊查询的内容',menu:'#stu_mm'"></input>
-                    <div id="stu_mm" style="width:120px">
-                        <%--<div data-options="name:'name',iconCls:'icon-ok'">上师名</div>--%>
-                            <%--<div data-options="name:'department',iconCls:'icon-ok'">部门</div>--%>
-                            <%--<div data-options="name:'address',iconCls:'icon-ok'">地址</div>--%>
-                    </div>
 
+                    <div style="float: right">
+                        <input type="text" id="search_stuId" placeholder="请输入学号">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" id="search_username" placeholder="请输入学生名称">
+                        <a id="student_search" class="easyui-linkbutton"
+                           data-options="iconCls:'icon-search',plain:true,text:'查询'" onclick="searchStudent()"></a>
+                    </div>
                     <%--操作窗口--%>
                     <div id="stu_dd"></div>
 

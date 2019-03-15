@@ -12,6 +12,8 @@ public interface RegisterInfoService {
 
     public Integer addRegisterInfo(RegisterInfo registerInfo);
 
+    public Integer removeRegisterInfo(String id);
+
     public Integer modifyRegisterInfo(RegisterInfo registerInfo);
 
     public Map<String,Object> queryAllRegisterInfo(Page page,RegisterInfo registerInfo);

@@ -21,4 +21,8 @@ public interface ClubService {
 
     public Map<String,Object> queryAllClub(Page page,Club club);
 
+    public Map<String,Object> countClubCategory();
+
+    public Map<String,Object> countClubRegisterInfo();
+
 }

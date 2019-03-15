@@ -4,6 +4,7 @@ import com.xl.ccms.entity.Account;
 import com.xl.ccms.entity.Page;
 import org.omg.PortableInterceptor.INACTIVE;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,5 +20,5 @@ public interface StudentService {
 
     public Integer modifyStudent(Account account);
 
-
+    public List<Account> queryAll();
 }

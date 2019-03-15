@@ -29,6 +29,11 @@ public class RegisterInfoServiceImpl implements RegisterInfoService {
     }
 
     @Override
+    public Integer removeRegisterInfo(String id) {
+        return registerInfoDao.deleteRegisterInfo(id);
+    }
+
+    @Override
     public Integer modifyRegisterInfo(RegisterInfo registerInfo) {
         return registerInfoDao.updateRegisterInfo(registerInfo);
     }

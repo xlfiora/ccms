@@ -8,13 +8,13 @@ import java.io.OutputStream;
 import java.util.Random;
 
 public class CreateValidateCodeUtil {
-	// ͼƬ�Ŀ�ȡ�
+	// 宽
 	private int width = 160;
-	// ͼƬ�ĸ߶ȡ�
+	// 高
 	private int height = 40;
-	// ��֤���ַ����
+	// 字数
 	private int codeCount = 4;
-	// ��֤���������
+	// 线条
 	private int lineCount = 20;
 	// ��֤��
 	private String code = null;

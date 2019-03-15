@@ -18,7 +18,7 @@ public class RegisterInfo {
 
     private String clubId;
 
-    private String clubNmae;
+    private String clubName;
 
     private String status;
 
@@ -61,12 +61,12 @@ public class RegisterInfo {
         this.clubId = clubId;
     }
 
-    public String getClubNmae() {
-        return clubNmae;
+    public String getClubName() {
+        return clubName;
     }
 
-    public void setClubNmae(String clubNmae) {
-        this.clubNmae = clubNmae;
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
     }
 
     public String getStatus() {

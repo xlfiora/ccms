@@ -1,9 +1,12 @@
 package com.xl.ccms.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.xl.ccms.entity.Account;
 import com.xl.ccms.entity.Page;
 import com.xl.ccms.service.AccountService;
 import com.xl.ccms.service.StudentService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,13 +41,15 @@ public class StudentController {
     private AccountService accountService;
 
     @RequestMapping("/queryAllStu")
-    public @ResponseBody Map<String,Object> queryAllStu(@RequestParam("page")Integer nowPage, @RequestParam("rows")Integer pageSize){
+    public @ResponseBody Map<String,Object> queryAllStu(@RequestParam("page")Integer nowPage, @RequestParam("rows")Integer pageSize,String stuId,String username){
 
         Page page = new Page();
         page.setPageIndex(nowPage);
         page.setSingleRows(pageSize);
 
         Account account = new Account();
+        account.setStuId(stuId);
+        account.setUsername(username);
 
         return studentService.queryAllStu(page,account);
     }
@@ -117,5 +125,31 @@ public class StudentController {
             e.printStackTrace();
         }
     }
+
+    @RequestMapping("exportExcel")
+    public void exportExcel(HttpServletResponse response){
+        try {
+            List<Account> students = studentService.queryAll();
+
+            Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("学生用户信息表", "学生用户信息表"), Account.class, students);
+
+            ServletOutputStream out =response.getOutputStream();
+
+            String fileName = new String("学生用户信息表.xls".getBytes(),"iso-8859-1");
+            //文件下载 设置响应头
+            response.setContentType("application/vnd.ms-excel");//响应类型
+            response.setHeader("content-disposition","attachment;fileName="+fileName);
+
+            //导出 文件下载方式
+            workbook.write(out);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.xl.ccms.config;
 
-import com.xl.ccms.dao.AccountDao;
 import com.xl.ccms.entity.*;
 import com.xl.ccms.entity.Account;
 import com.xl.ccms.service.AccountService;
