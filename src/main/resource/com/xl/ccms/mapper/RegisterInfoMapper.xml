@@ -67,7 +67,7 @@
     </insert>
 
     <delete id="deleteRegisterInfo">
-        delete from account_club where account_id = #{id}
+        delete from account_club where  = #{id}
     </delete>
 
     <update id="updateRegisterInfo">
@@ -80,5 +80,7 @@
         where id = #{id}
     </update>
 
-
+    <select id="countInfo" resultType="java.lang.Integer">
+        select count(*) from account_club where account_id = #{accountId} and club_id = #{clubId}
+    </select>
 </mapper>

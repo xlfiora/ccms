@@ -20,4 +20,6 @@ public interface ManagerDao {
     public Integer deleteManager(String id);
 
     public Integer updateManager(Account account);
+
+    public Integer countById(String id);
 }

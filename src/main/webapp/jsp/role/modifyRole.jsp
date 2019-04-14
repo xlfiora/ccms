@@ -16,11 +16,24 @@
                         // do some check
                         // return false to prevent submit;
                     },
-                    success:function(){
-                        $("#roleList").datagrid('load',{
-
-                        });
-                        $("#role_dd").dialog("close");
+                    success:function(r){
+                        if(r=="1"){
+                            $("#roleList").datagrid('load',{});
+                            $("#role_dd").dialog("close");
+                            $.messager.show({
+                                title:'提交成功',
+                                msg:'修改成功！',
+                                timeout:3000,
+                                showType:'slide'
+                            });
+                        }else {
+                            $.messager.show({
+                                title:'提交成功',
+                                msg:'修改失败！',
+                                timeout:3000,
+                                showType:'slide'
+                            });
+                        }
                     }
                 });
 

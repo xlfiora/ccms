@@ -71,9 +71,23 @@
                                 type:"POST",
                                 url:"${pageContext.request.contextPath}/registerInfo/addRegisterInfo",
                                 data:"clubId="+rowData.id,
-                                success: function(){
-                                    $("#choose_confirm").window("close");
-                                    alert("申请加入成功！");
+                                success: function(r){
+                                    if(r=="1"){
+                                        $("#choose_confirm").window("close");
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'申请加入成功！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }else {
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'请勿重复申请！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }
                                 }
                             });
                         }

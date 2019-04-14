@@ -103,11 +103,24 @@
                                 type:"POST",
                                 url:"${pageContext.request.contextPath}/club/removeClub",
                                 data:"id="+rowData.id,
-                                success: function(){
-                                    $("#clubList").datagrid('load',{
-
-                                    });
-                                    $("#club_confirm").window("close");
+                                success: function(r){
+                                    if(r=="1"){
+                                        $("#clubList").datagrid('load',{});
+                                        $("#club_confirm").window("close");
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'删除成功！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }else {
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'删除失败！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }
                                 }
                             });
                         }

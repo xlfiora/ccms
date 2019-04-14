@@ -55,7 +55,7 @@ public class StudentController {
     }
 
     @RequestMapping("/addStudent")
-    public @ResponseBody void addStudent(String stuId,String username,String password){
+    public @ResponseBody Integer addStudent(String stuId,String username,String password){
 
         Account account = new Account();
         account.setType("0");
@@ -65,27 +65,28 @@ public class StudentController {
         account.setPassword(password);
         account.setPhoto("blank.jpg");
         account.setEnterdate(new Date());
-        Integer result = studentService.addStudent(account);
+        return studentService.addStudent(account);
 
     }
 
     @RequestMapping("/removeStudent")
-    public @ResponseBody void removeStudent(String id){
+    public @ResponseBody Integer removeStudent(String id){
         studentService.removeStudent(id);
+        return 1;
     }
 
     @RequestMapping("/modifyStudent")
-    public @ResponseBody void modifyStudent(String id,String username,String tel){
+    public @ResponseBody Integer modifyStudent(String id,String username,String tel){
         Account account = new Account();
         account.setId(id);
         account.setUsername(username);
         account.setTel(tel);
-        studentService.modifyStudent(account);
+        return studentService.modifyStudent(account);
     }
 
 
     @RequestMapping("/modifyMyInfo")
-    public @ResponseBody void modifyMyInfo(String id, String username, String sex, String birthday, String tel, String qq, String hometown, String dormitory, String hobby, MultipartFile file, HttpServletRequest request){
+    public @ResponseBody Integer modifyMyInfo(String id, String username, String sex, String birthday, String tel, String qq, String hometown, String dormitory, String hobby, MultipartFile file, HttpServletRequest request){
 
         try {
             String photo = file.getOriginalFilename();
@@ -121,9 +122,12 @@ public class StudentController {
 
             session.setAttribute("account",account1);
 
+            return 1;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     @RequestMapping("exportExcel")

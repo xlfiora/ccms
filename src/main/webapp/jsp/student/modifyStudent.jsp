@@ -13,14 +13,28 @@
                 $("#stu_mf").form("submit", {
                     url:"${pageContext.request.contextPath}/student/modifyStudent",
                     onSubmit: function(){
-                        // do some check
-                        // return false to prevent submit;
+                      if($("#username").val()=="" || $("#tel").val()==""){
+                          return false;
+                      }
                     },
-                    success:function(){
-                        $("#stuList").datagrid('load',{
-
-                        });
-                        $("#stu_dd").dialog("close");
+                    success:function(r){
+                        if(r=="1"){
+                            $("#stuList").datagrid('load',{});
+                            $("#stu_dd").dialog("close");
+                            $.messager.show({
+                                title:'提交成功',
+                                msg:'修改成功！',
+                                timeout:3000,
+                                showType:'slide'
+                            });
+                        } else {
+                            $.messager.show({
+                                title:'提交成功',
+                                msg:'修改失败！',
+                                timeout:3000,
+                                showType:'slide'
+                            });
+                        }
                     }
                 });
 
@@ -44,11 +58,11 @@
             <input type="text" name="id" style="display: none"/>
             <tr>
                 <td>姓名:</td>
-                <td><input class="easyui-validatebox" data-options="required:true," name="username"/></td>
+                <td><input class="easyui-validatebox" data-options="required:true," id="username" name="username"/></td>
             </tr>
             <tr>
                 <td>电话:</td>
-                <td><input class="easyui-validatebox" data-options="required:true," name="tel"/></td>
+                <td><input class="easyui-validatebox" data-options="required:true," id="tel" name="tel"/></td>
             </tr>
             <tr>
                 <td><a id="stu_mf_submit" class="easyui-linkbutton" data-options="iconCls:'icon-picture_save'">保存</a></td>

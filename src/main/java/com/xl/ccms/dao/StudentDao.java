@@ -23,4 +23,6 @@ public interface StudentDao {
 
     public List<Account> selectAll();
 
+    public Integer countById(String id);
+
 }

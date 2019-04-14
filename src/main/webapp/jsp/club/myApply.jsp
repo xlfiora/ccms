@@ -59,10 +59,24 @@
                                 type:"POST",
                                 url:"${pageContext.request.contextPath}/registerInfo/cancelMyApply",
                                 data:"id="+rowData.id,
-                                success: function(){
-                                    $("#myApplyList").datagrid('load',{});
-                                    $("#myApply_confirm").window("close");
-                                    alert("撤销报名申请加入成功！");
+                                success: function(r){
+                                    if(r=="1"){
+                                        $("#myApplyList").datagrid('load',{});
+                                        $("#myApply_confirm").window("close");
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'撤销申请成功！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }else {
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'撤销申请失败！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }
                                 }
                             });
                         }

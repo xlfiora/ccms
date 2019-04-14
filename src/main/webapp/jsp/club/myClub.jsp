@@ -59,10 +59,25 @@
                                 type:"POST",
                                 url:"${pageContext.request.contextPath}/registerInfo/cancelMyApply",
                                 data:"id="+rowData.id,
-                                success: function(){
-                                    $("#myClubList").datagrid('load',{});
-                                    $("#myClub_confirm").window("close");
-                                    alert("退出社团成功！");
+                                success: function(r){
+                                    if (r=="1"){
+                                        $("#myClubList").datagrid('load',{});
+                                        $("#myClub_confirm").window("close");
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'退出社团成功！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }else {
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'退出社团成功！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }
+
                                 }
                             });
                         }
@@ -96,7 +111,7 @@
                 <%--操作栏--%>
                 <div id="myClub_tb" style="display: none;">
                     <a id="myClub_cancel" class="easyui-linkbutton"
-                       data-options="iconCls:'icon-cancel',plain:true,text:'撤销申请'"></a>
+                       data-options="iconCls:'icon-cancel',plain:true,text:'退出社团'"></a>
                     <%--操作窗口--%>
                     <div id="myClub_dd"></div>
 

@@ -32,8 +32,9 @@ public class RoleController {
     }
 
     @RequestMapping("/modifyRole")
-    public @ResponseBody void modifyRole(String accountId,String roleId){
+    public @ResponseBody Integer modifyRole(String accountId,String roleId){
         roleService.modifyRole(accountId,roleId);
+        return 1;
     }
 
 }

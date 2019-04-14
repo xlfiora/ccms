@@ -25,7 +25,11 @@ public class RegisterInfoServiceImpl implements RegisterInfoService {
 
     @Override
     public Integer addRegisterInfo(RegisterInfo registerInfo) {
-        return registerInfoDao.insertRegisterInfo(registerInfo);
+        Integer count = registerInfoDao.countInfo(registerInfo.getClubId(), registerInfo.getAccountId());
+        if(count>0){
+            return registerInfoDao.insertRegisterInfo(registerInfo);
+        }
+        return 0;
     }
 
     @Override

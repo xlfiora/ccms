@@ -1,5 +1,6 @@
 package com.xl.ccms.dao;
 
+import com.xl.ccms.entity.Club;
 import com.xl.ccms.entity.Page;
 import com.xl.ccms.entity.RegisterInfo;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,7 @@ public interface RegisterInfoDao {
     public List<RegisterInfo> selectByPage(@Param("page") Page page, @Param("registerInfo") RegisterInfo registerInfo);
 
     public Integer countByCondition(@Param("registerInfo") RegisterInfo registerInfo);
+
+    public Integer countInfo(String clubId,String accountId);
 
 }

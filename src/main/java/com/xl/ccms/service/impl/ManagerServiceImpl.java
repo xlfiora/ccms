@@ -45,14 +45,23 @@ public class ManagerServiceImpl implements ManagerService{
 
     @Override
     public Integer addManager(Account account) {
-        account.setSalt(RandomSaltUtil.generetRandomSaltCode());
-        account.setPassword(new Md5Hash(account.getPassword(),account.getSalt(),1024).toString());
-        return managerDao.insertManager(account)+roleDao.insertRole(UUID.randomUUID().toString(),account.getId(),"2");
+        Integer count = managerDao.countById(account.getId());
+        if(count>0){
+            return 0;
+        }else{
+            account.setSalt(RandomSaltUtil.generetRandomSaltCode());
+            account.setPassword(new Md5Hash(account.getPassword(),account.getSalt(),1024).toString());
+            Integer r1 = managerDao.insertManager(account);
+            Integer r2 = roleDao.insertRole(UUID.randomUUID().toString(),account.getId(),"2");
+            return r1+r2;
+        }
     }
 
     @Override
     public Integer removeManager(String id) {
-        return managerDao.deleteManager(id)+roleDao.deleteRole(id);
+        Integer r1 = managerDao.deleteManager(id);
+        Integer r2 = roleDao.deleteRole(id);
+        return r1+r2;
     }
 
     @Override

@@ -16,11 +16,25 @@
                         // do some check
                         // return false to prevent submit;
                     },
-                    success:function(){
-                        $("#registerInfoList").datagrid('load',{
+                    success:function(r){
+                        if(r=="1"){
+                            $("#registerInfoList").datagrid('load',{});
+                            $("#registerInfo_dd").dialog("close");
+                            $.messager.show({
+                                title:'提交成功',
+                                msg:'审批成功！',
+                                timeout:3000,
+                                showType:'slide'
+                            });
+                        }else {
+                            $.messager.show({
+                                title:'提交成功',
+                                msg:'审批失败！',
+                                timeout:3000,
+                                showType:'slide'
+                            });
+                        }
 
-                        });
-                        $("#registerInfo_dd").dialog("close");
                     }
                 });
 

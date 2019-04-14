@@ -54,7 +54,7 @@
 
     </script>
 </head>
-<body>
+<body style="background-color: #dddddd">
 <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column" style="margin-top: 30px">
@@ -68,13 +68,13 @@
             </div>
             <div class="col-md-4 column">
                 <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong> 编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small> 社区中。
+                    <strong>学生社团</strong> 是指学生在自愿基础上结成的各种群众性文化、艺术、学术团体。不分年级、系科甚至学校的界限，由兴趣爱好相近的同学组成。在保证学生完成学习任务和不影响学校正常教学秩序的前提下开展各种活动。
                 </p>
                 <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong> 编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small> 社区中。
+                    <strong>大学生社团</strong> 是我国校园文化建设的重要载体，是我国高校第二课堂的引领者。每年各社团以其具有思想性、艺术性、知识性、趣味性、多样性的社团生活吸引广大学生积极参与其中。
                 </p>
                 <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong> 编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small> 社区中。
+                    <strong>创建目的</strong> 是活跃学校学习氛围，提高学生自治能力，丰富课余生活；交流思想，切磋技艺，互相启迪，增进友谊。种类很多，如各种学术、社会问题研究会，文艺社、棋艺社、影视评论社、摄影社、美工社、篆刻社、歌咏队、剧团、篮球队、足球队、信息社等。
                 </p>
             </div>
             <div class="col-md-2 column">

@@ -86,8 +86,9 @@ public class ClubController {
 
 
     @RequestMapping("/removeClub")
-    public @ResponseBody void removeClub(String id){
+    public @ResponseBody Integer removeClub(String id){
         clubService.removeClub(id);
+        return 1;
     }
 
     @RequestMapping("/modifyClub")

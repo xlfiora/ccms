@@ -89,4 +89,9 @@
         </set>
         where id = #{id}
     </update>
+
+
+    <select id="countById" resultType="java.lang.Integer">
+        select count(*) from account where id =#{id}
+    </select>
 </mapper>

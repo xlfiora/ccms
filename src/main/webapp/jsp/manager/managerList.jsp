@@ -85,9 +85,24 @@
                                 type:"POST",
                                 url:"${pageContext.request.contextPath}/manager/removeManager",
                                 data:"id="+rowData.id,
-                                success: function(){
-                                    $("#managerList").datagrid('load',{});
-                                    $("#manager_confirm").window("close");
+                                success: function(r){
+                                    if(r=="1"){
+                                        $("#managerList").datagrid('load',{});
+                                        $("#manager_confirm").window("close");
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'删除成功！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }else {
+                                        $.messager.show({
+                                            title:'提交成功',
+                                            msg:'删除失败！',
+                                            timeout:3000,
+                                            showType:'slide'
+                                        });
+                                    }
                                 }
                             });
                         }

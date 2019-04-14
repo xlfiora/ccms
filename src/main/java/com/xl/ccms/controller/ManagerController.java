@@ -35,7 +35,7 @@ public class ManagerController {
     }
 
     @RequestMapping("/addManager")
-    public @ResponseBody void addManager(String stuId,String username,String password,String tel){
+    public @ResponseBody Integer addManager(String stuId,String username,String password,String tel){
 
         Account account = new Account();
         account.setType("1");
@@ -45,22 +45,23 @@ public class ManagerController {
         account.setPassword(password);
         account.setTel(tel);
         account.setEnterdate(new Date());
-        Integer result = managerService.addManager(account);
+        return managerService.addManager(account);
 
     }
 
     @RequestMapping("/removeManager")
-    public @ResponseBody void removeManager(String id){
-        managerService.removeManager(id);
+    public @ResponseBody Integer removeManager(String id){
+       managerService.removeManager(id);
+       return 1;
     }
 
     @RequestMapping("/modifyManager")
-    public @ResponseBody void modifyManager(String id,String username,String tel){
+    public @ResponseBody Integer modifyManager(String id,String username,String tel){
         Account account = new Account();
         account.setId(id);
         account.setUsername(username);
         account.setTel(tel);
-        managerService.modifyManager(account);
+        return managerService.modifyManager(account);
     }
 
 

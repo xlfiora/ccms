@@ -9,16 +9,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style type="text/css">
-    tr {
+    #myInfo_table tr {
         width: 600px;
         height: 80px;
     }
 
-    td {
+    #myInfo_table td {
         width: 300px;
     }
 
-    img {
+    #myInfo_table img {
         width: 300px;
         height: 300px;
     }
@@ -63,7 +63,7 @@
     <div class="row" style="height: 60%;background-color: #FFFFFF;margin-top: 8px;padding: 100px">
         <div class="container" style="border:1px dashed #000" >
             <form id="myInfo_mf" method="post" enctype="multipart/form-data">
-                <table style="margin: 10px;border: hidden">
+                <table id="myInfo_table" style="margin: 10px;border: hidden">
                     <tr>
                         <td>
                             <label>账号：</label>

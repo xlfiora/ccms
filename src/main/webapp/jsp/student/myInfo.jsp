@@ -8,16 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style type="text/css">
-    tr {
+    #myInfo_table tr {
         width: 600px;
         height: 50px;
     }
 
-    td {
+    #myInfo_table td {
         width: 300px;
     }
 
-    img {
+    #myInfo_table img {
         width: 300px;
         height: 300px;
     }
@@ -37,7 +37,7 @@
     </div>
     <div class="row" style="height: 60%;background-color: #FFFFFF;margin-top: 8px;padding: 100px">
         <div class="container" style="border:1px dashed #000">
-            <table style="margin: 10px;border: hidden">
+            <table id="myInfo_table" style="margin: 10px;border: hidden">
                 <tr>
                     <td><div>账号：${sessionScope.account.id}</div></td>
                     <td><div>用户名：${sessionScope.account.username}</div></td>

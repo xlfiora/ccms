@@ -183,7 +183,7 @@
             <shiro:hasRole name="user">
             <div title="我的社团" data-options="iconCls:'icon-qwe3334343'" style="padding:10px;">
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-house',plain:true" onclick="addTab('社团报名','club/chooseClub.jsp','icon-house')">社团报名</a></p>
-                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-house_go',plain:true" onclick="addTab('社团活动','club/myApply.jsp','icon-house_go')">申请中社团</a></p>
+                <p><a class="easyui-linkbutton" data-options="iconCls:'icon-house_go',plain:true" onclick="addTab('我的申请','club/myApply.jsp','icon-house_go')">申请中社团</a></p>
                 <p><a class="easyui-linkbutton" data-options="iconCls:'icon-house_link',plain:true" onclick="addTab('已参加社团','club/myClub.jsp','icon-house_link')">已参加社团</a></p>
             </div>
             </shiro:hasRole>

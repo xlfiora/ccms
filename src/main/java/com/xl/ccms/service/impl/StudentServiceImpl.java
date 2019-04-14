@@ -49,14 +49,24 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public Integer addStudent(Account account) {
-        account.setSalt(RandomSaltUtil.generetRandomSaltCode());
-        account.setPassword(new Md5Hash(account.getPassword(),account.getSalt(),1024).toString());
-        return studentDao.insertStudent(account)+roleDao.insertRole(UUID.randomUUID().toString(),account.getId(),"3");
+        Integer count = studentDao.countById(account.getId());
+        if(count>0){
+            return 0;
+        }else{
+            account.setSalt(RandomSaltUtil.generetRandomSaltCode());
+            account.setPassword(new Md5Hash(account.getPassword(),account.getSalt(),1024).toString());
+            Integer r1 = studentDao.insertStudent(account);
+            Integer r2 = roleDao.insertRole(UUID.randomUUID().toString(), account.getId(), "3");
+            return r1+r2;
+        }
     }
 
     @Override
     public Integer removeStudent(String id) {
-        return studentDao.deleteStudent(id)+roleDao.deleteRole(id)+registerInfoDao.deleteRegisterInfo(id);
+        Integer r1 = studentDao.deleteStudent(id);
+        Integer r2 = roleDao.deleteRole(id);
+        Integer r3 = registerInfoDao.deleteRegisterInfo(id);
+        return r1+r2+r3;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class RegisterInfoController {
     private RegisterInfoService registerInfoService;
 
     @RequestMapping("/addRegisterInfo")
-    public @ResponseBody void addRegisterInfo(String clubId, HttpSession session){
+    public @ResponseBody Integer addRegisterInfo(String clubId, HttpSession session){
 
         Account account = (Account) session.getAttribute("account");
 
@@ -49,8 +49,8 @@ public class RegisterInfoController {
         registerInfo.setStatus("0");
         registerInfo.setRegisterDate(new Date());
 
-        registerInfoService.addRegisterInfo(registerInfo);
-
+        Integer result = registerInfoService.addRegisterInfo(registerInfo);
+        return result;
     }
 
     @RequestMapping("/queryAllRegisterInfo")
@@ -71,11 +71,11 @@ public class RegisterInfoController {
     }
 
     @RequestMapping("/approval")
-    public  @ResponseBody void approval(String id,String status){
+    public  @ResponseBody Integer approval(String id,String status){
         RegisterInfo registerInfo = new RegisterInfo();
         registerInfo.setId(id);
         registerInfo.setStatus(status);
-        registerInfoService.modifyRegisterInfo(registerInfo);
+        return registerInfoService.modifyRegisterInfo(registerInfo);
     }
 
 
@@ -98,8 +98,8 @@ public class RegisterInfoController {
     }
 
     @RequestMapping("/cancelMyApply")
-    public @ResponseBody void cancelMyApply(String id){
-        registerInfoService.removeRegisterInfo(id);
+    public @ResponseBody Integer cancelMyApply(String id){
+       return registerInfoService.removeRegisterInfo(id);
     }
 
     @RequestMapping("/queryMyClub")
